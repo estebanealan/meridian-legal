@@ -1,0 +1,260 @@
+---
+import Layout from "@layouts/Layout.astro";
+import AnimatedTitle from "@components/AnimatedTitle";
+import AnimatedCounter from "@components/AnimatedCounter";
+
+const T = {
+  navy: "#262B21",
+  navyLight: "#2f352a",
+  navyMid: "#3a4035",
+  gold: "#9BA19A",
+  goldDark: "#7a807a",
+  cream: "#F4EEE4",
+  creamDark: "#ebe4d8",
+  white: "#ffffff",
+  textLight: "#6b7268",
+  border: "#d8d2c8",
+};
+
+const services = [
+  {
+    href: "/private-equity",
+    title: "Private Equity",
+    sub: "Fondos que se estructuran para cerrar. 98% de tasa de éxito.",
+    desc: "Diseñamos la arquitectura legal de su fondo, ejecutamos due diligence de targets y cerramos transacciones desde $500K hasta $50M+. Con 180+ fondos asesorados y presencia en 12 jurisdicciones, su capital tiene cobertura completa.",
+    cta: "Estructurar mi fondo",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>`,
+  },
+  {
+    href: "/real-estate",
+    title: "Real Estate",
+    sub: "120+ transacciones. Cero defectos de título. Cero sorpresas.",
+    desc: "Desde investigación registral hasta escritura y registro, cubrimos cada paso de su transacción inmobiliaria. Due diligence en 48 horas. Cobertura completa: residencial de lujo, desarrollos comerciales, hotelería y ZMT.",
+    cta: "Proteger mi inversión",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg>`,
+  },
+  {
+    href: "/escrow",
+    title: "Escrow",
+    sub: "Sus fondos no se mueven hasta que TODAS las condiciones se cumplan.",
+    desc: "Custodia imparcial en cuentas segregadas de Banco Nacional, BAC y Scotiabank. Pólizas de $5M por evento. Desembolso en menos de 24 horas post-verificación. 320+ operaciones con historial perfecto.",
+    cta: "Iniciar escrow seguro",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`,
+  },
+  {
+    href: "/tax-advisory",
+    title: "Asesoría Fiscal y Patrimonial",
+    sub: "Estrategia fiscal proactiva integrada con sus inversiones.",
+    desc: "Planificación fiscal plurianual, estructuración corporativa, protección patrimonial y coordinación fiscal transfronteriza. $250M+ en activos bajo asesoría con cero resultados adversos en auditorías.",
+    cta: "Optimizar mi posición fiscal",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+  },
+];
+
+const team = [
+  { name: "Lic. Carlos Vargas R.", role: "Director · Private Equity", exp: "25 años", init: "CV", bio: "Estructurado fondos y transacciones de inversión en Costa Rica y Centroamérica." },
+  { name: "Lic. María Fernández", role: "Socia · Real Estate", exp: "18 años", init: "MF", bio: "Experta en transacciones inmobiliarias complejas, ZMT, desarrollos y titulación." },
+  { name: "Lic. Roberto Mora L.", role: "Socio · Escrow Services", exp: "15 años", init: "RM", bio: "Agente de escrow certificado. 320+ custodias ejecutadas sin incidentes." },
+  { name: "Lic. Ana Castillo P.", role: "Asociada · Due Diligence", exp: "12 años", init: "AC", bio: "Especialista en investigaciones legales exhaustivas, compliance y AML/KYC." },
+];
+
+const whyStats = [
+  { v: "$250M+", l: "Transacciones cerradas" }, { v: "320+", l: "Custodias sin incidentes" },
+  { v: "98%", l: "Tasa de cierre exitoso" }, { v: "12", l: "Jurisdicciones cubiertas" },
+];
+
+const whyChecks = [
+  "Especialización exclusiva en PE, Real Estate y Escrow. No diluimos expertise",
+  "Resultados verificables: $250M+ cerrados, 98% tasa de cierre, cero defectos de título",
+  "Equipo bilingüe con clientes en 12 jurisdicciones (más del 40% son internacionales)",
+  "Agentes de escrow certificados: cuentas segregadas propias, pólizas de $5M",
+  "Honorarios predecibles con estructura clara antes de empezar. Sin sorpresas",
+];
+---
+
+<Layout
+  title="MERIDIAN | Firma Legal en Costa Rica"
+  description="Firma legal especializada en Private Equity, Real Estate y Escrow en Costa Rica. Protegemos inversiones de alto valor con rigor jurídico."
+>
+  <!-- ── HERO ── -->
+  <section
+    style={`min-height:100vh;background:linear-gradient(160deg,#1a1f17 0%,${T.navy} 55%,#2f352b 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:70px`}
+    aria-label="Sección principal"
+  >
+    <!-- Grid texture -->
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(155,161,154,0.03) 0px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,rgba(155,161,154,0.03) 0px,transparent 1px,transparent 80px)" aria-hidden="true"></div>
+    <!-- Radial glow -->
+    <div style="position:absolute;top:-250px;right:-180px;width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(155,161,154,0.07) 0%,transparent 70%)" aria-hidden="true"></div>
+
+    <div style="max-width:1240px;margin:0 auto;padding:140px 28px 100px;position:relative;z-index:2;width:100%">
+      <!-- Section label -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>PRIVATE EQUITY · REAL ESTATE · ESCROW</span>
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+      </div>
+
+      <AnimatedTitle client:load as="h1" className="font-display font-semibold text-white leading-[1.08] mb-[28px] max-w-[760px]" style={{ fontSize: "clamp(38px,5.8vw,70px)" }}>
+        Su inversión merece asesoría legal que <em style={{ color: T.gold, fontStyle: "italic" }}>cierra</em>, no que complica
+      </AnimatedTitle>
+
+      <p style={`font-family:'DM Sans',sans-serif;font-size:17px;color:rgba(255,255,255,0.5);line-height:1.8;max-width:560px;margin-bottom:44px`}>
+        $250M+ en transacciones cerradas. 320+ custodias sin incidentes. Cero defectos de título. MERIDIAN protege inversiones de alto valor en Costa Rica con resultados demostrables, no con promesas.
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:80px">
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="/contacto" style={`background:${T.cream};border:none;color:${T.navy};padding:14px 32px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.3px;display:inline-flex;align-items:center;gap:8px;text-decoration:none`}>
+            Agendar Consulta Confidencial
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#resultados" style={`background:transparent;border:1px solid rgba(155,161,154,0.5);color:${T.gold};padding:14px 32px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:0.5px;display:inline-flex;align-items:center;gap:8px;text-decoration:none`}>
+            Ver Resultados
+          </a>
+        </div>
+        <p style={`font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.35)`}>Sin costo · Sin compromiso · Respuesta en 24h</p>
+      </div>
+
+      <!-- Stats -->
+      <div style="display:flex;gap:60px;flex-wrap:wrap">
+        {([["$250M+", "En transacciones"], ["180+", "Fondos asesorados"], ["15+", "Años de experiencia"], ["98%", "Tasa de cierre"]] as const).map(([v, l]) => (
+          <div>
+            <AnimatedCounter client:load value={v} className="font-display font-semibold" style={{ fontSize: "44px", color: T.gold }} delay={0.4} />
+            <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;margin-top:4px">{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICIOS ── -->
+  <section style={`padding:110px 28px;background:${T.cream}`} aria-label="Nuestros servicios">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:64px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Nuestras Especialidades</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <h2 style={`font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:${T.navy}`}>Cuatro especialidades. Un estándar: cero sorpresas.</h2>
+      </div>
+
+      <div class="services-grid">
+        {services.map(s => (
+          <a href={s.href} style={`background:${T.white};border-radius:12px;padding:40px;border:1px solid ${T.border};text-decoration:none;display:block`} class="group relative overflow-hidden transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-[0_24px_48px_rgba(38,43,33,0.12)]">
+            <div style={`position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,${T.gold},${T.goldDark})`} class="opacity-70 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <div style={`width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:${T.creamDark};color:${T.navy};margin-bottom:22px`} class="transform transition-transform duration-700 group-hover:scale-110" set:html={s.icon}></div>
+            <h3 style={`font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:${T.navy};margin-bottom:8px`}>{s.title}</h3>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:13px;color:${T.gold};font-weight:500;margin-bottom:14px`}>              {s.sub}</p>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:14px;color:${T.textLight};line-height:1.8;margin-bottom:24px`}>{s.desc}</p>
+            <span style={`font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:${T.navy};display:flex;align-items:center;gap:6px`}>
+              {s.cta} →
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── POR QUÉ NOSOTROS ── -->
+  <section id="resultados" style={`padding:110px 28px;background:${T.navy}`} aria-label="Por qué elegirnos">
+    <div style="max-width:1240px;margin:0 auto" class="why-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>¿Por qué elegirnos?</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <AnimatedTitle client:visible className="font-display font-semibold text-white leading-[1.18] mb-[24px]" style={{ fontSize: "38px" }}>
+          No somos una firma generalista que <em style={{ color: T.gold, fontStyle: "italic" }}>también hace inversiones</em>
+        </AnimatedTitle>
+        <p style="font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:34px">
+          Mientras otras firmas diluyen su expertise entre 20 áreas de práctica, nosotros nos enfocamos en tres. Esa especialización es la razón de nuestros resultados.
+        </p>
+        {whyChecks.map(t => (
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+            <div style={`width:24px;height:24px;border-radius:50%;background:rgba(155,161,154,0.15);display:flex;align-items:center;justify-content:center;color:${T.gold};flex-shrink:0`}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.6)">{t}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={`background:${T.navyLight};border-radius:16px;padding:44px;border:1px solid ${T.navyMid}`} class="stats-grid-inner">
+        {whyStats.map(s => (
+          <div style={`padding:18px;border-radius:10px;background:rgba(38,43,33,0.6);border:1px solid ${T.navyMid}`}>
+            <AnimatedCounter client:visible value={s.v} className="font-display font-semibold mb-[4px]" style={{ fontSize: "32px", color: T.gold }} delay={0.2} />
+            <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.32)">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EQUIPO ── -->
+  <section id="equipo" style={`padding:110px 28px;background:${T.cream}`} aria-label="Nuestro equipo">
+    <div style="max-width:1240px;margin:0 auto;text-align:center">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Nuestro Equipo</span>
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+      </div>
+      <h2 style={`font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:${T.navy};margin-bottom:56px`}>Abogados que entienden de negocios, no solo de leyes</h2>
+
+      <div class="team-grid">
+        {team.map(t => (
+          <div style={`background:${T.white};border-radius:12px;padding:32px;border:1px solid ${T.border}`} class="group transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(244,238,228,0.8)] cursor-pointer">
+            <div style={`width:72px;height:72px;border-radius:50%;margin:0 auto 18px;background:${T.navy};border:2px solid ${T.gold};display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:${T.gold}`} class="transform transition-transform duration-700 group-hover:scale-110">{t.init}</div>
+            <h3 style={`font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:${T.navy};margin-bottom:6px`}>{t.name}</h3>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:12px;color:${T.gold};margin-bottom:4px;font-weight:500`}>{t.role}</p>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.textLight};margin-bottom:8px`}>{t.exp} de experiencia</p>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:12px;color:${T.textLight};line-height:1.6`}>{t.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINAL ── -->
+  <section style={`padding:90px 28px;background:${T.navyLight};border-top:1px solid ${T.navyMid}`} aria-label="Llamada a la acción">
+    <div style="max-width:640px;margin:0 auto;text-align:center">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Próximo Paso</span>
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+      </div>
+      <h2 style={`font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:${T.white};line-height:1.2;margin-bottom:16px`}>
+        Una conversación de 30 minutos puede cambiar el rumbo de su transacción
+      </h2>
+      <p style="font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.42);margin-bottom:32px;line-height:1.75">
+        Agenda una consulta confidencial sin costo. Le diremos exactamente qué necesita, cuánto cuesta y en cuánto tiempo. Sin vueltas.
+      </p>
+      <a href="/contacto" style={`background:${T.cream};border:none;color:${T.navy};padding:14px 32px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.3px;display:inline-flex;align-items:center;gap:8px;text-decoration:none`}>
+        Reservar Mi Consulta Gratuita
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <p style={`font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.3);margin-top:16px`}>Confidencial · Sin compromiso · Respuesta garantizada en 24h</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(38,43,33,0.12); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .stats-grid-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-grid-inner { grid-template-columns: repeat(2, 1fr); }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

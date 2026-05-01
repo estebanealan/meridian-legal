@@ -1,0 +1,96 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ContactForm from "@components/ContactForm";
+import AnimatedTitle from "@components/AnimatedTitle";
+
+const T = {
+  navy: "#262B21",
+  navyMid: "#3a4035",
+  gold: "#9BA19A",
+  cream: "#F4EEE4",
+  creamDark: "#ebe4d8",
+  white: "#ffffff",
+  text: "#262B21",
+  textLight: "#6b7268",
+  border: "#d8d2c8",
+};
+
+const contactInfo = [
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>`,
+    label: "Línea principal",
+    text: "+506 2222-3333",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>`,
+    label: "Correo",
+    text: "info@meridianlegis.com",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    label: "Oficina",
+    text: "Sabana Norte, Torre Legal, Piso 8\nSan José, Costa Rica",
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+    label: "Horario",
+    text: "Lun – Vie: 8:00am – 6:00pm",
+  },
+];
+---
+
+<Layout
+  title="Contacto | MERIDIAN"
+  description="Agende una consulta confidencial con MERIDIAN. Primera consulta sin costo. Especialistas en Private Equity, Real Estate y Escrow."
+>
+  <!-- HERO MINI -->
+  <section
+    style={`min-height:300px;background:linear-gradient(160deg,#1a1f17 0%,${T.navy} 100%);display:flex;align-items:flex-end;padding-top:70px;position:relative`}
+    aria-label="Contacto hero"
+  >
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(155,161,154,0.025) 0px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,rgba(155,161,154,0.025) 0px,transparent 1px,transparent 80px)" aria-hidden="true"></div>
+    <div style="max-width:1240px;margin:0 auto;padding:80px 28px 56px;position:relative;z-index:2;width:100%">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Contacto</span>
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+      </div>
+      <AnimatedTitle client:load as="h1" className="font-display font-semibold text-white" style={{ fontSize: "48px" }}>
+        Conversemos sobre su próxima operación
+      </AnimatedTitle>
+    </div>
+  </section>
+
+  <!-- CUERPO -->
+  <section style={`padding:80px 28px;background:${T.cream}`}>
+    <div style="max-width:1240px;margin:0 auto" class="contact-grid">
+      <!-- Info lateral -->
+      <div>
+        <AnimatedTitle client:visible className="font-display font-semibold mb-[16px]" style={{ fontSize: "28px", color: T.navy }}>
+          Consulta inicial sin costo ni compromiso
+        </AnimatedTitle>
+        <p style={`font-family:'DM Sans',sans-serif;font-size:15px;color:${T.textLight};line-height:1.8;margin-bottom:36px`}>
+          Complete el formulario y un abogado especialista se comunicará en menos de 24 horas para entender su situación y proponerle un plan de acción. Sin obligación.
+        </p>
+
+        {contactInfo.map(info => (
+          <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:22px" class="group transition-all duration-700 hover:translate-x-2">
+            <div style={`width:38px;height:38px;border-radius:9px;background:${T.creamDark};display:flex;align-items:center;justify-content:center;color:${T.navy};flex-shrink:0`} class="transition-colors duration-700 group-hover:bg-[#d8d2c8]" set:html={info.icon}></div>
+            <div>
+              <div style={`font-family:'DM Sans',sans-serif;font-size:10px;color:${T.gold};font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px`}>{info.label}</div>
+              <div style={`font-family:'DM Sans',sans-serif;font-size:14px;color:${T.text};white-space:pre-line;line-height:1.6`}>{info.text}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Formulario — React island, client:load porque está above-the-fold -->
+      <ContactForm client:load />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+</style>

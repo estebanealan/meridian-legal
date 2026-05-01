@@ -1,0 +1,92 @@
+---
+/**
+ * Layout base del despacho.
+ * Fuentes: Cormorant Garamond + DM Sans — self-hosted via @font-face en global.css.
+ * Cumple: "Auto-hospedadas SIEMPRE" — Manifiesto VRC-ELITE §2.4
+ */
+import Nav from "@components/Nav.astro";
+import Footer from "@components/Footer.astro";
+import "@styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = "/og-default.jpg",
+} = Astro.props;
+
+const siteName = "MERIDIAN";
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_CR" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD Organization -->
+    <script type="application/ld+json" is:inline>
+      {
+        JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": "MERIDIAN",
+          "url": "https://meridianlegis.com",
+          "description": "Firma legal especializada en Private Equity, Real Estate y Escrow en Costa Rica.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sabana Norte, Torre Legal, Piso 8",
+            "addressLocality": "San José",
+            "addressCountry": "CR"
+          },
+          "telephone": "+506-2222-3333",
+          "email": "info@meridianlegis.com",
+          "openingHours": "Mo-Fr 08:00-18:00",
+          "areaServed": "CR",
+          "priceRange": "$$$"
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

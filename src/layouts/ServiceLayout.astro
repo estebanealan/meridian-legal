@@ -1,0 +1,221 @@
+---
+import Layout from "@layouts/Layout.astro";
+import FAQList from "@components/FAQList";
+import AnimatedTitle from "@components/AnimatedTitle";
+import AnimatedCounter from "@components/AnimatedCounter";
+import type { ServiceConfig } from "@lib/services";
+
+export interface Props {
+  config: ServiceConfig;
+}
+
+const { config } = Astro.props;
+
+const T = {
+  navy: "#262B21",
+  navyLight: "#2f352a",
+  navyMid: "#3a4035",
+  gold: "#9BA19A",
+  goldDark: "#7a807a",
+  cream: "#F4EEE4",
+  creamDark: "#ebe4d8",
+  white: "#ffffff",
+  textLight: "#6b7268",
+  border: "#d8d2c8",
+};
+
+const checkIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+---
+
+<Layout
+  title={`${config.label} | MERIDIAN`}
+  description={config.subtitle}
+>
+  <!-- HERO -->
+  <section
+    style={`min-height:500px;background:linear-gradient(160deg,#1a1f17 0%,${T.navy} 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:70px`}
+    aria-label={`Hero ${config.label}`}
+  >
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(155,161,154,0.025) 0px,transparent 1px,transparent 80px),repeating-linear-gradient(0deg,rgba(155,161,154,0.025) 0px,transparent 1px,transparent 80px)" aria-hidden="true"></div>
+    <div style="position:absolute;top:-200px;right:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(155,161,154,0.07) 0%,transparent 70%)" aria-hidden="true"></div>
+
+    <div style="max-width:1240px;margin:0 auto;padding:80px 28px 70px;position:relative;z-index:2;width:100%">
+      <a href="/" style={`color:rgba(255,255,255,0.38);font-family:'DM Sans',sans-serif;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:22px;text-decoration:none`}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Volver al inicio
+      </a>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>{config.label}</span>
+        <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+      </div>
+
+      <AnimatedTitle client:load as="h1" className="font-display font-semibold text-white leading-[1.1] mb-[20px] max-w-[720px]" style={{ fontSize: "clamp(32px,4.8vw,58px)" }}>
+        {config.heroTitle}<em style={{ color: T.gold, fontStyle: "italic" }}>{config.heroTitleAccent}</em>
+      </AnimatedTitle>
+      <p style={`font-family:'DM Sans',sans-serif;font-size:16px;color:rgba(255,255,255,0.46);line-height:1.8;max-width:620px;margin-bottom:40px`}>{config.subtitle}</p>
+
+      <div style="display:flex;gap:52px;flex-wrap:wrap">
+        {config.heroStats.map(s => (
+          <div>
+            <AnimatedCounter client:load value={s.v} className="font-display font-semibold" style={{ fontSize: "42px", color: T.gold }} delay={0.4} />
+            <div style="font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.32);letter-spacing:1.8px;text-transform:uppercase;margin-top:4px">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section style={`padding:100px 28px;background:${T.cream}`} aria-label="Descripción general">
+    <div style="max-width:1240px;margin:0 auto" class="overview-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Descripción General</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <AnimatedTitle client:visible className="font-display font-semibold leading-[1.22] mb-[24px]" style={{ fontSize: "34px", color: T.navy }}>
+          {config.overviewTitle}
+        </AnimatedTitle>
+        {config.overviewText.map(p => (
+          <p style={`font-family:'DM Sans',sans-serif;font-size:15px;color:${T.textLight};line-height:1.85;margin-bottom:18px`}>{p}</p>
+        ))}
+      </div>
+      <div class="overview-stats">
+        {config.overviewStats.map(s => (
+          <div style={`background:${T.white};border-radius:12px;padding:26px;border:1px solid ${T.border}`} class="group transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(38,43,33,0.08)]">
+            <AnimatedCounter client:visible value={s.v} className="font-display font-semibold mb-[6px]" style={{ fontSize: "32px", color: T.navy }} delay={0.2} />
+            <div style={`font-family:'DM Sans',sans-serif;font-size:13px;color:${T.textLight};line-height:1.45`}>{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS DETALLADOS -->
+  <section style={`padding:100px 28px;background:${T.white}`} aria-label="Servicios detallados">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:56px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Servicios Detallados</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <AnimatedTitle client:visible className="font-display font-semibold" style={{ fontSize: "38px", color: T.navy }}>
+          Lo Que Ofrecemos
+        </AnimatedTitle>
+      </div>
+      <div class="services-detail-grid">
+        {config.services.map(s => (
+          <div style={`background:${T.cream};border-radius:12px;padding:30px 26px;border:1px solid ${T.border};position:relative;overflow:hidden`} class="group transition-all duration-700 ease-out hover:bg-white hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(38,43,33,0.08)] border border-transparent hover:border-[#d8d2c8]">
+            <div style={`position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,${T.gold},${T.goldDark})`} class="opacity-70 group-hover:opacity-100 transition-opacity duration-700"></div>
+            <h3 style={`font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:${T.navy};margin-bottom:10px;line-height:1.3`}>{s.title}</h3>
+            <p style={`font-family:'DM Sans',sans-serif;font-size:14px;color:${T.textLight};line-height:1.8`}>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section style={`padding:100px 28px;background:${T.cream}`} aria-label="Nuestro proceso">
+    <div style="max-width:1240px;margin:0 auto" class="process-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Nuestro Proceso</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <AnimatedTitle client:visible className="font-display font-semibold leading-[1.22] mb-[16px]" style={{ fontSize: "34px", color: T.navy }}>
+          {config.processTitle}
+        </AnimatedTitle>
+        <p style={`font-family:'DM Sans',sans-serif;font-size:15px;color:${T.textLight};line-height:1.8`}>{config.processDesc}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:26px">
+        {config.steps.map((s, i) => (
+          <div style="display:flex;gap:18px;align-items:flex-start">
+            <div style={`width:42px;height:42px;border-radius:50%;flex-shrink:0;background:${T.navy};display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:${T.gold};border:1px solid ${T.navyMid}`}>{i + 1}</div>
+            <div>
+              <h4 style={`font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:${T.navy};margin-bottom:6px`}>{s.title}</h4>
+              <p style={`font-family:'DM Sans',sans-serif;font-size:14px;color:${T.textLight};line-height:1.75`}>{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY INFO -->
+  <section style={`padding:100px 28px;background:${T.navy}`} aria-label={config.keyTitle}>
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:56px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>{config.keyLabel}</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <AnimatedTitle client:visible className="font-display font-semibold text-white" style={{ fontSize: "38px" }}>
+          {config.keyTitle}
+        </AnimatedTitle>
+      </div>
+      <div class="key-grid">
+        {config.keyItems.map(c => (
+          <div style={`background:${T.navyLight};border-radius:12px;padding:28px;border:1px solid ${T.navyMid}`} class="group transition-all duration-700 ease-out hover:bg-[#32382d] hover:-translate-y-1 hover:shadow-2xl">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <span style={`color:${T.gold}`} set:html={checkIcon}></span>
+              <h4 style={`font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:${T.white}`}>{c.title}</h4>
+            </div>
+            <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.42);line-height:1.8">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ — React island cargado solo cuando es visible -->
+  <section style={`padding:100px 28px;background:${T.cream}`} aria-label="Preguntas frecuentes">
+    <div style="max-width:800px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:48px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;justify-content:center">
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+          <span style={`font-family:'DM Sans',sans-serif;font-size:11px;color:${T.gold};letter-spacing:3px;text-transform:uppercase;font-weight:500`}>Preguntas Frecuentes</span>
+          <div style={`width:28px;height:1px;background:${T.gold}`}></div>
+        </div>
+        <h2 style={`font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:${T.navy}`}>Resolvemos sus Dudas</h2>
+      </div>
+      <!-- client:visible — hidrata solo cuando entra en viewport -->
+      <FAQList client:visible items={config.faqs} />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style={`padding:80px 28px;background:${T.navyLight};border-top:1px solid ${T.navyMid}`} aria-label="Llamada a la acción">
+    <div style="max-width:680px;margin:0 auto;text-align:center">
+      <h2 style={`font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:${T.white};margin-bottom:16px`}>{config.ctaHeadline}</h2>
+      <p style="font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.4);margin-bottom:30px;line-height:1.75">Consulta confidencial sin costo. Un abogado especialista le dirá exactamente qué necesita y cómo proteger su operación. Sin letra pequeña.</p>
+      <a href="/contacto" style={`background:${T.cream};border:none;color:${T.navy};padding:14px 32px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.3px;display:inline-flex;align-items:center;gap:8px;text-decoration:none`}>
+        {config.ctaButton}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <p style={`font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.3);margin-top:14px`}>Sin costo · Confidencial · Respuesta en 24h</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .overview-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+  .overview-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .services-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; }
+  .process-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 70px; align-items: start; }
+  .key-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+
+  @media (max-width: 1024px) {
+    .overview-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .overview-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "schedule": ["every weekend"],
+  "timezone": "America/Mexico_City",
+  "labels": ["dependencies"],
+  "assignees": [],
+  "packageRules": [
+    {
+      "description": "Agrupar actualizaciones de Next.js y sus tipos",
+      "matchPackageNames": ["next", "@types/react", "@types/react-dom", "react", "react-dom"],
+      "groupName": "Next.js ecosystem",
+      "automerge": false
+    },
+    {
+      "description": "Agrupar herramientas de desarrollo (auto-merge patch/minor)",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Dev tools (minor/patch)",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Biome — nunca auto-merge (puede tener breaking changes de linting)",
+      "matchPackageNames": ["@biomejs/biome"],
+      "automerge": false,
+      "labels": ["dependencies", "linter"]
+    },
+    {
+      "description": "Pinear versiones de Node.js types",
+      "matchPackageNames": ["@types/node"],
+      "rangeStrategy": "pin"
+    }
+  ],
+  "ignoreDeps": [],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled"
+}

@@ -1,0 +1,88 @@
+---
+const T = {
+  navy: "#262B21",
+  navyMid: "#3a4035",
+  gold: "#9BA19A",
+  white: "#ffffff",
+};
+
+const services = [
+  { label: "Private Equity", href: "/private-equity" },
+  { label: "Real Estate", href: "/real-estate" },
+  { label: "Escrow", href: "/escrow" },
+  { label: "Asesoría Fiscal", href: "/tax-advisory" },
+];
+const firma = [
+  { label: "Nuestro Equipo", href: "/#equipo" },
+  { label: "Resultados", href: "/#resultados" },
+  { label: "Contacto", href: "/contacto" },
+];
+const contacto = [
+  { label: "+506 2222-3333", href: "tel:+50622223333" },
+  { label: "info@meridianlegis.com", href: "mailto:info@meridianlegis.com" },
+  { label: "San José, Costa Rica", href: null },
+];
+---
+
+<footer style={`background:${T.navy};border-top:1px solid ${T.navyMid};padding:56px 28px 28px`}>
+  <div style="max-width:1240px;margin:0 auto">
+    <div class="footer-grid" style="display:grid;gap:40px;margin-bottom:40px">
+      <!-- Marca -->
+      <div>
+        <a href="/" style={`display:flex;align-items:center;gap:10px;margin-bottom:16px;text-decoration:none`} aria-label="Inicio">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={T.gold} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18M3 7l3-4 3 4M15 7l3-4 3 4M3 7h6M15 7h6M6 7l-3 9a5 5 0 006 0L6 7zM18 7l-3 9a5 5 0 006 0L18 7z"/>
+          </svg>
+          <span style={`font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:${T.white}`}>
+            MERIDIAN
+          </span>
+        </a>
+        <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.75;max-width:280px">
+          $250M+ en transacciones cerradas. 320+ custodias sin incidentes. Protección legal de inversiones en Costa Rica.
+        </p>
+      </div>
+
+      <!-- Servicios -->
+      <div>
+        <h4 style={`font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:${T.gold};letter-spacing:2px;text-transform:uppercase;margin-bottom:16px`}>Servicios</h4>
+        {services.map(s => (
+          <p style="margin-bottom:10px">
+            <a href={s.href} style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.38);text-decoration:none">{s.label}</a>
+          </p>
+        ))}
+      </div>
+
+      <!-- Firma -->
+      <div>
+        <h4 style={`font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:${T.gold};letter-spacing:2px;text-transform:uppercase;margin-bottom:16px`}>Firma</h4>
+        {firma.map(s => (
+          <p style="margin-bottom:10px">
+            <a href={s.href} style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.38);text-decoration:none">{s.label}</a>
+          </p>
+        ))}
+      </div>
+
+      <!-- Contacto -->
+      <div>
+        <h4 style={`font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:${T.gold};letter-spacing:2px;text-transform:uppercase;margin-bottom:16px`}>Contacto</h4>
+        {contacto.map(s => (
+          s.href
+            ? <p style="margin-bottom:10px"><a href={s.href} style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.38);text-decoration:none">{s.label}</a></p>
+            : <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.38);margin-bottom:10px">{s.label}</p>
+        ))}
+      </div>
+    </div>
+
+    <div style={`border-top:1px solid ${T.navyMid};padding-top:20px;text-align:center`}>
+      <p style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.2)">
+        © 2026 MERIDIAN · San José, Costa Rica · Todos los derechos reservados
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>

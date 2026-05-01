@@ -1,36 +1,40 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
+# Secretos - NUNCA commitear
+.env
+.env.*
+!.env.example
 *.pem
+*.key
+*.p12
+*.pfx
+serviceAccountKey*.json
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Dependencias
+node_modules/
+.pnp.*
 
-# local env files
-.env*.local
+# Build
+.next/
+.vercel/
+dist/
+build/
+.turbo/
 
-# vercel
-.vercel
+# OS
+.DS_Store
+Thumbs.db
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# IDE
+.vscode/*.local.json
+.idea/
+*.code-workspace
+
+# Logs y source maps
+*.log
+*.map
+
+# Generados
+src/generated/
+
+# Manifiestos de framework (no van a prod)
+VRC-ELITE-*.md
+GEMINI.md
